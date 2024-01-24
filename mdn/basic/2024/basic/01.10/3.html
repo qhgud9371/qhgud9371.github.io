@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        a {
+            display: inline-block;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#">
+        <img src="images/img_1.jpg" alt="">
+    </a>
+
+<script>
+
+    const imgWrap = document.querySelector('a');
+
+    imgWrap.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        const img = document.querySelector('img');
+        let imgSrc = img.getAttribute('src');
+        // const imgSrcName = img.getAttribute('src').split('/').reverse()[0].split('.')[0];
+        console.log(imgSrc);
+
+        if(imgSrc === 'images/img_1.jpg') {
+            // img.src = `images/img_2.jpg`
+            img.setAttribute('src', 'images/img_2.jpg');
+        } else {
+            // img.src = `images/img_1.jpg`
+            img.setAttribute('src', 'images/img_1.jpg');
+        }
+
+
+
+
+    });
+
+    
+</script>
+
+</body>
+</html>

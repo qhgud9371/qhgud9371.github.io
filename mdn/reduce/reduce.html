@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>reduce</h1>
+
+<script>
+    const arr = [1, 2, -1, -20, 1000, 2024, -999];
+    // console.log(arr);
+
+    const result = arr.reduce((acc, cur, idx) => {
+
+        if(cur < 0) {
+            //음수일경우
+            acc[0]++;
+        }
+        else if(cur > 0) {
+            //양수일경우
+            acc[1]++;
+        }
+
+        return acc;
+    }, [0,0]);
+
+    console.log(result);
+
+</script>
+
+</body>
+</html>

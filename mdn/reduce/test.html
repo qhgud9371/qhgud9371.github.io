@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+
+    const arr = [0, 10, 20, 30, 40];
+
+    const result = arr.reduce((accumulator, currentValue, currentIndex, array) => {
+
+        // accumulator += currentValue;
+        console.log(accumulator += currentValue);
+        // console.log(accumulator += currentIndex);
+
+        return accumulator;
+
+    }, 10);
+
+    // console.log(result);
+
+    // 초기값 설정 안했을시, 0 번째 인덱스값 건너띄고 1번째 인덱스부터 시작
+    // 0 + 10  10
+    // 10 + 20  30
+    // 30 + 30  60
+    // 60 + 40  100
+    // 100
+
+    // 초기값 10으로 설정시
+    // 10 + 0 10
+    // 10 + 10 20
+    // 20 + 20 40
+    // 40 + 30 70
+    // 70 + 40 110
+    // 110
+
+    // 누산값 + 현재 인덱스값 초기값 설정 x
+    // 0 + 1 1
+    // 1 + 2 3
+    // 3 + 3 6
+    // 6 + 4 10
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

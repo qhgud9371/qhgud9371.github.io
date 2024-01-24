@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>게시판 만들기</title>
+</head>
+<body>
+
+<nav></nav>
+
+
+<script>
+    // const prRoomData = Array.from({length: 27}, (_, index) => ({
+    //     seq: index,
+    //     type: 'Dental Tribune',
+    //     date: `2021.09.${((index % 30) + 1 + '').padStart(2, '0')}`,
+    //     title: `title-${index + 1}`,
+    //     description: `description-${index + 1}`
+    // }));
+    //
+    // const loadPrRoomData = (page, size) => prRoomData.slice((page - 1) * size, (page - 1) * size + size);
+    // //console.log(prRoomData)
+
+
+    const paging = (target, currentPage, pageCount, totalPage) => {
+                    //=function paging(target, currentPage, pageCount, totalPage)  둘다같은데 const형식으로하면 다른사람이 수정할때 안에값변경하면오류뜸
+                    //타겟, 현재값, 페이징에 보여줄 넘버 갯수, 토탈페이지
+
+        let items = '';
+
+        //페이지 그룹
+        let pageGroup = Math.ceil(currentPage / pageCount)
+
+        //let 페이지 마지막값
+        let lastNum = pageGroup * pageCount;
+
+        //let 페이지시작값
+        let startNum = lastNum - (pageCount - 1)
+        if(lastNum > totalPage){
+            lastNum = totalPage
+        }
+
+        //이전값
+        let prev = startNum - pageCount;
+        if(prev < 1){
+            prev = 1;
+        }
+
+        //let 다음
+        let next = lastNum + 1
+
+
+        items += '<li><a href="#" data-page="1">처음</a></li>';
+
+        // items += '<li><a href="#" data-page="'+ prev +'">이전</a></li>';
+        if(startNum === 1){   // prev===1 이렇게할경우 1일때 무조건 disabled 되기때문에 스타트값으로바꿔준다
+            items += '<li><a href="#" class="disabled" data-page="'+ prev +'">이전</a></li>';
+        }else{
+            items += '<li><a href="#" data-page="'+ prev +'">이전</a></li>';
+        }
+
+        for (let i = startNum; i <= lastNum; i++) {
+            if(currentPage === i) {
+                items += `<li><a href="#" class="on" data-page="${i}">${i}</a></li>`;
+            }else{
+                items += `<li><a href="#" data-page="${i}">${i}</a></li>`;
+            }
+        }
+
+        if(lastNum === totalPage){
+            items += '<li><a href="#" class="disabled" data-page="'+ next +'">다음</a></li>';
+        }else{
+            items += '<li><a href="#" data-page="'+ next +'">다음</a></li>';
+        }
+
+        items += '<li><a href="#" data-page="' + totalPage + '">마지막</a></li>';
+
+        target.innerHTML = '<ul>' + items + '</ul>';
+
+        const links = target.querySelectorAll('a');
+
+        links.forEach((link) => {
+            link.addEventListener('click', (event) => {   // = link.addEventListener(function('click')
+                event.preventDefault()
+                if(link.classList.contains('disabled')){ //disabled클래스 추가되면 클릭막기
+                    return;
+                }
+                console.log(link.dataset.page, pageCount,totalPage)
+                paging(target, link.dataset.page * 1, pageCount, totalPage);  //현재페이지*1 하는 이유는 현재값은 문자열이기때문에 *1해줘서 숫자로 변경
+            });
+        });
+    };
+
+
+    paging(document.querySelectorAll('nav')[0], 1, 5, 21);  //타겟, 현재값, 페이징에 보여줄 넘버 갯수, 토탈페이지
+    // paging(document.querySelectorAll('nav')[1], 7, 5, 15);
+    // paging(document.querySelectorAll('nav')[2], 4, 5, 6);
+    // paging(document.querySelectorAll('nav')[3], 7, 10, 11);
+    // paging(document.querySelectorAll('nav')[4], 32, 10, 35);
+    // paging(document.querySelectorAll('nav')[5], 4, 3, 10);
+
+
+
+</script>
+</body>
+</html>

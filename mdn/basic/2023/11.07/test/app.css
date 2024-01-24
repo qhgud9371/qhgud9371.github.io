@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #000;
+}
+
+.wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    column-gap: 40px;
+}
+
+.tab {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.tab__list a {
+    display: block;
+    font-size: 20px;
+}
+
+.tab__list a.active {
+    color: red;
+}
+
+.contents__item {
+    display: none;
+}
+
+.contents__item.active {
+    display: block;
+}
+
+iframe {
+    border: none;
+    aspect-ratio: 16/9;
+}

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <a href="intro_video.mp4" target="_blank">테스트</a>
+    <a href="../test.ppt" target="_blank">테스트2</a>
+    <a href="../ALZ380962.pdf" target="_blank">테스트3</a>
+
+    <section class="contents">
+        <header>
+            <h2>1주차 QUIZE EVENT</h2>
+            <p>
+                이벤트기간 : 9/1 [금] ~ 9/5 [화] <br>
+                힌트를 확인하시고 정답을 입력해주세요.
+            </p>
+        </header>
+        <div>
+            <ul class="input-box">
+                <li><input type="text" name="answer"></li>
+                <li><input type="text" name="answer"></li>
+                <li><input type="text" name="answer"></li>
+                <li><input type="text" name="answer"></li>
+            </ul>
+        </div>
+        <ul class="button-box">
+            <li><a class="hint-button" href="http://www.naver.com" target="_blank">힌트보기</a></li>
+            <li><a class="event-button" href="#">EVENT 참여하기</a></li>
+        </ul>
+    </section>
+
+    <script>
+        const hintButton = document.querySelector('.hint-button');
+        const eventButton = document.querySelector('.event-button');
+        const inputBox = document.querySelector('.input-box');
+        const inputs = document.querySelectorAll('[name="answer"]');
+        const arr = new Array(inputs);
+        console.log(arr);
+
+        eventButton.addEventListener('click', () => {
+
+            if(!inputBox.classList.contains('active')) {
+                alert('힌트보기 버튼을 눌러 힌트를 확인해주세요!');
+
+                return false;
+            }
+
+            arr.map((item)  => {
+
+                if(inputBox.classList.contains('active') && !item.value) {
+                    alert('정답을 입력해 주세요');
+                    return false;
+                }
+
+                else {
+                    console.log('팝업창 실행')
+                }
+            })
+
+        })
+
+
+        const inputActive = () => {
+            inputBox.classList.add('active');
+            // eventButton.style.pointerEvents = 'auto';
+        }
+
+        hintButton.addEventListener('click', () => {
+            inputActive();
+        })
+
+
+
+    </script>
+
+</body>
+</html>

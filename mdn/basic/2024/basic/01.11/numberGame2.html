@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<h2>숫자 추측 게임</h2>
+<p>
+    숫자는 1 ~ 100까지 입력가능 <br>
+    기회는 10회까지 <br>
+    오답시 힌트를 줌. (up or down)
+</p>
+
+<div class="form">
+    <label for="resultInput">숫자를 입력해주세요.</label>
+    <input type="number" min="1" max="100" id="resultInput" class="resultInput">
+    <button type="submit" class="resultSubmit">정답제출</button>
+</div>
+
+<div class="textWrap">
+    <p class="textAccumulation"></p>
+    <p class="textResult"></p>
+    <p class="textHint"></p>
+</div>
+
+<script>
+    let randomNumber = Math.floor(Math.random() * 100) + 1;
+    const resultInput = document.querySelector('.resultInput');
+    const resultSubmitButton = document.querySelector('.resultSubmit');
+
+    const textAccumulation = document.querySelector('.textAccumulation');
+    const textResult = document.querySelector('.textResult');
+    const textHint = document.querySelector('.textHint');
+
+    let guessCount = 1;
+    let resetGameButton;
+    resultInput.focus();
+
+    const settingGame = () => {
+        const resultInputValue = Number(resultInput.value);
+
+        if(guessCount === 1) {
+            textAccumulation.textContent = "누적 정답값: ";
+        }
+
+        textAccumulation.textContent += resultInputValue + " ";
+
+
+        // 정답이라면
+        if(resultInputValue === randomNumber) {
+            textResult.textContent = "정답입니다.";
+            textResult.style.background = "green";
+            textResult.style.color = "white";
+
+            textHint.textContent = "";
+
+            gameOver();
+        }
+
+        // 만약 오답인데 플레이어 턴이 남아있지 않다면
+        else if(guessCount === 10) {
+            textResult.textContent = "Game Over";
+            textResult.style.background = "red";
+            textResult.style.color = "white";
+            textHint.textContent = "";
+
+            gameOver();
+        }
+
+        // 오답이고 아직 플레이어 턴이 남아있다면
+        else {
+            textResult.textContent = "오답입니다.";
+            textResult.style.background = "red";
+            textResult.style.color = "white";
+
+            if(resultInputValue > randomNumber) {
+                textHint.textContent = "Down!! 입력한 값이 정답보다 높습니다."
+            } else {
+                textHint.textContent = "Up!! 입력한 값이 정답보다 낮습니다."
+            }
+
+        }
+
+        guessCount++;
+        resultInput.value = "";
+    }
+
+    resultSubmitButton.addEventListener('click', settingGame)
+
+
+    const gameOver = () => {
+        resultInput.disabled = true;
+        resultSubmitButton.inert = true;
+
+        resetGameButton = document.createElement('button');
+        document.body.append(resetGameButton);
+        resetGameButton.textContent = "New Game"
+
+        resetGameButton.addEventListener('click', resetGame);
+    }
+
+    const resetGame = () => {
+        resultInput.disabled = false;
+        resultSubmitButton.inert = false;
+
+        const textWraps = document.querySelectorAll('.textWrap p');
+
+        for(const textWrap of textWraps) {
+            textWrap.textContent = "";
+        }
+
+        resetGameButton.remove();
+
+        guessCount = 1;
+        randomNumber = Math.floor(Math.random() * 100) + 1;
+        resultInput.focus();
+    }
+
+
+</script>
+
+</body>
+</html>
