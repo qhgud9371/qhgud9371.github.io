@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #000;
+        }
+        
+        p {
+            color: #fff;
+            font-size: 60px;
+        }
+
+        .cursor_item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+
+            let x;
+            let y;
+            let mx = 0;
+            let my = 0;
+            let speed = 0.2;
+            const text = document.getElementsByTagName('p')[0];
+            const cursor_item = document.getElementsByClassName('cursor_item')[0];
+
+            window.addEventListener('mousemove', mousefunc , false);
+
+            function mousefunc(e) {
+                x = e.clientX;
+                y = e.clientY;
+                //console.log(e.clientX, e.clientY);
+
+                text.innerHTML = 'x : ' + x  +  ' y :' + y;
+
+                loop();
+            }
+
+            function loop() {
+                //console.log(x, y)
+                mx += (x - mx) * speed;
+                my += (y - my) * speed;
+                cursor_item.style.transform = "translate(" + mx + "px," + my + "px)";
+            }
+
+        }
+
+
+    </script>
+</head>
+<body>
+
+    <p>test</p>
+    <div class="cursor_item"></div>
+
+
+</body>
+</html>

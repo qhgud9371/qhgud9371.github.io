@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/연습.css">
+</head>
+<body>
+
+    <p class="text"></p>
+
+    <div class="cursor_item">
+        <span class="circle"></span>
+    </div>
+
+    <div class="content">
+        <p>마스끄를 쓰고 있나요?</p>
+        <div class="list">
+            <a id="yes" href="#">네</a>
+            <a id="no" href="#">아니요</a>
+        </div>
+    </div>
+
+
+<script>
+
+
+    window.onload = function () {
+
+        let x;
+        let y;
+        const text = document.querySelector('.text');
+        const cursorItem = document.querySelector('.cursor_item');
+        const circle = document.querySelector('.circle');
+        const yes = document.getElementById('yes');
+        const no = document.getElementById('no');
+
+
+        yes.addEventListener('mouseover', function (){
+            circle.style.transform = "scale(.3)"
+        });
+
+        yes.addEventListener('mouseout', function (){
+            circle.style.transform = "scale(1)"
+        });
+
+
+
+
+        document.addEventListener('mousemove', function (e) {
+            //console.log(e.clientX,e.clientY);
+            x = e.clientX;
+            y = e.clientY;
+            // text.innerHTML = "x = " + e.clientX + " y = " + e.clientY;
+            text.innerHTML = "x = " + x + " y = " + y;
+
+            cursorItem.style.transform = "translate("+x+"px, "+y+"px)"
+
+        })
+
+        loop();
+    }
+
+    function loop() {
+        requestAnimationFrame(loop);
+    }
+
+
+
+
+</script>
+</body>
+</html>
