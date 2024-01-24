@@ -1,0 +1,54 @@
+@charset "UTF-8";
+@use "sass:math";
+@import "mixins";
+
+.main {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+
+
+    &__menu {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        height: 100%;
+        background-color: coral;
+        
+        button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+
+            span {
+                display: block;
+                width: 40px;
+                height: 5px;
+                background-color: #fff;
+
+                &:nth-of-type(n+2) {
+                    margin-top: 10px;
+                }
+
+                &:last-of-type {
+                    @include visually-hidden;
+                }
+            }
+        }
+    }
+
+    &__contents {
+        flex-grow: 10;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        position: relative;
+        height: 100%;
+    }
+
+    &__contents-item {
+        background-color: #ddd;
+        border:1px solid blue
+    }
+}

@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+:root {
+  --marquee-elements: 8;
+  --marquee-elements-displayed: 4;
+  --marquee-elements-duration: calc(var(--marquee-elements) * 2s);
+}
+
+.marquee {
+  overflow: hidden;
+  position: relative;
+  width: 1000px;
+  margin: 0 auto;
+  background-color: #000;
+  color: #eee;
+}
+.marquee::before, .marquee::after {
+  position: absolute;
+  top: 0;
+  width: 10rem;
+  height: 100%;
+  z-index: 1;
+  content: "";
+}
+.marquee::before {
+  left: 0;
+  background: linear-gradient(to right, #111 5%, transparent 100%);
+}
+.marquee::after {
+  right: 0;
+  background: linear-gradient(to left, #111 5%, transparent 100%);
+}
+.marquee__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: move var(--marquee-elements-duration) linear infinite;
+  transform: translateX(50%);
+}
+@keyframes move {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee__item {
+  position: relative;
+  flex-shrink: 0;
+  width: calc(100% / var(--marquee-elements-displayed));
+  font-size: 100px;
+  text-align: center;
+}
+
+/*# sourceMappingURL=app.css.map */

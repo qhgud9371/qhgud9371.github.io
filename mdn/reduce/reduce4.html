@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<h1>타입변환</h1>
+
+<script>
+    const arr = ['ko', '안녕', 'en', 'hello', 'jp', 'こんにちは'];
+
+    const result = arr.reduce((acc, currentValue, index, src) => {
+
+        if(index === 0 || index % 2 === 0) {
+            // 둘중 하나만 만족해도 실행한다.
+            // index값 0 or 0,2,4 번째 index를 찾는다.
+            acc[currentValue] = src[index + 1];
+        } else {
+            acc, acc
+        }
+
+        return acc;
+
+    }, {});
+
+    console.log(result);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello Dom</title>
+    <style>
+        .gray {
+            filter: grayscale(100%);
+        }
+    </style>
+</head>
+<body>
+
+    <img class="testImg" src="images/test_img.jpg" alt="">
+
+
+    <script>
+        const testImg = document.querySelector('.testImg');
+        console.log(testImg);
+
+
+        testImg.addEventListener('click', () => {
+            testImg.classList.toggle('gray');
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CustomEvent</title>
+</head>
+<body>
+
+<div class="test">커스텀이벤트</div>
+
+<script>
+    const catFound = new CustomEvent('animalfound', {
+        detail: {
+            name: 'cat',
+        }
+    });
+
+    const dogFund = new CustomEvent('animalfound', {
+        detail: {
+            name: 'dog',
+        }
+    });
+
+    const test = document.querySelector('.test');
+
+    test.addEventListener('animalfound', (event) => {
+        console.log(event.detail.name);
+        // test.dispatchEvent(catFound);
+    });
+
+    test.dispatchEvent(catFound);
+    test.dispatchEvent(dogFund);
+
+</script>
+
+</body>
+</html>

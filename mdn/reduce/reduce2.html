@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>reduce 활용해서 배열 값 구하기</h1>
+<h2>1~5 숫자를 다 더한 값</h2>
+<p id="number"></p>
+<script>
+    const arr = [1,2,3,4,5];
+
+    const result = arr.reduce((test, cur) => {
+
+        test += cur;
+
+        return test;
+    }, 0);
+
+    console.log(result)
+    const number = document.getElementById('number');
+    number.innerHTML = result;
+
+
+</script>
+</body>
+</html>

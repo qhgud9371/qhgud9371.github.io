@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>짝수 홀수 갯수 </h1>
+
+<script>
+    const arr = [1,2,3,4,5];
+    const arr2 = [11,22,33,44,55];
+
+    //짝수인지 홀수인지 맞추기
+    arr.reduce((acc, cur, idx) => {
+        (cur%2 === 0) ? console.log('짝수') : console.log('홀수');
+
+        return acc;
+    }, 0);
+
+    //짝수 홀수 갯수 맞추기
+    const result = arr2.reduce((acc, cur, idx) => {
+
+        if(cur%2===0) {
+            acc[0]++;
+        }
+
+        else if(!cur%2===0){
+            acc[1]++;
+        }
+
+        return acc;
+    }, [0,0]);
+
+    // console.log(result);
+
+    //배열 안에 값 다 더하기
+    const result2 = arr.reduce((acc, cur) => {
+
+        acc += cur;
+
+       return acc;
+    }, 0);
+
+    console.log(result2);
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+
+    <title>Number guessing game</title>
+
+    <style>
+        html {
+            font-family: sans-serif;
+        }
+
+        body {
+            width: 50%;
+            max-width: 800px;
+            min-width: 480px;
+            margin: 0 auto;
+        }
+
+        .lastResult {
+            color: #fff;
+            padding: 3px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<h1>Number guessing game</h1>
+
+<p>We have selected a random number between 1 and 100. See if you can guess it in 10 turns or less. We'll tell you if your guess was too high or too low.</p>
+
+<div class="form">
+    <label for="guessField">Enter a guess: </label>
+    <input type="text" id="guessField" class="guessField" min="1" max="100">
+    <input type="submit" value="Submit guess" class="guessSubmit">
+</div>
+
+<div class="resultParas">
+    <p class="guesses"></p>
+    <p class="lastResult"></p>
+    <p class="lowOrHi"></p>
+</div>
+
+</body>
+
+<script>
+    const guessField = document.querySelector('.guessField');
+    const guessSubmit = document.querySelector('.guessSubmit');
+
+    const guesses = document.querySelector('.guesses');
+    const lastResult = document.querySelector('.lastResult');
+    const lowOrHi = document.querySelector('.lowOrHi');
+
+    // 랜덤숫자 생성
+    let randomNumber = Math.floor(Math.random() * 100) + 1;
+    
+    // 턴 기회
+    let turn = 1;
+    
+    // New Game 버튼 생성
+    let newGameButton;
+
+    // 처음에 정답 입력 input으로 focus 이동
+    guessField.focus();
+
+    const initEvent = () => {
+        const guessFieldValue = Number(guessField.value);
+
+        // 처음에 답을 입력했을때만 guesses 에 텍스트 넣어주기
+        if(turn === 1) {
+            guesses.textContent = "Previous guesses: ";
+        }
+
+        // guesses 에 입력한 정답 값 차례로 넣어주기.. 공백값 넣어서 구분해주기
+        guesses.textContent += guessFieldValue + " ";
+
+        if(randomNumber === guessFieldValue) {
+            // 정답일경우
+
+            // 결과 보여주는 텍스트 넣어주기
+            lastResult.textContent = "정답입니다!!";
+            lastResult.style.background = "green";
+            lowOrHi.textContent = "";
+
+            // 재시작 버튼 함수 넣어주기
+            newGameEvent();
+        }
+
+        else if(turn === 10) {
+            // 만약 오답인데 플레이어 턴이 남아있지 않다면..
+
+            // 결과 보여주는 텍스트 넣어주기
+            lastResult.textContent = "Game Over... 다시 도전하실려면 New Game 버튼을 눌러주세요!";
+            lastResult.style.background = "red";
+            lowOrHi.textContent = "";
+
+            // 재시작 버튼 함수 넣어주기
+            newGameEvent();
+        }
+
+        else {
+            // 만약 오답이고 아직 플레이어 턴이 남아있다면...
+
+            // 결과 보여주는 텍스트 넣어주기
+            lastResult.textContent = "틀렸습니다.. 정답을 다시 입력해 주세요!!"
+            lastResult.style.background = "red";
+
+            if(randomNumber < guessFieldValue) {
+                // 입력한 값이 정답보다 클 경우
+                lowOrHi.textContent = "정답보다 높게 입력했습니다!!";
+            } else {
+                // 입력한 값이 정답보다 작을 경우
+                lowOrHi.textContent = "정답보다 작게 입력했습니다!!";
+            }
+        }
+
+        // 턴 1회씩 증가
+        turn++;
+
+        // guessField 값 리셋
+        guessField.value = "";
+    }
+
+    const newGameEvent = () => {
+        // 클릭 막기
+        guessField.disabled = true;
+        guessSubmit.disabled = true;
+
+        // newgame 버튼 넣어주기
+        newGameButton = document.createElement("button");
+        newGameButton.textContent = "Start New Game";
+
+        document.querySelector('body').append(newGameButton);
+
+        // 버튼 클릭시 reset 이벤트 함수 실행
+        newGameButton.addEventListener('click', resetEvent);
+    }
+
+    const resetEvent = () => {
+        // 랜덤숫자 리셋
+        randomNumber = Math.floor(Math.random() * 100) + 1;
+
+        // 클릭 막은거 풀기
+        guessField.disabled = false;
+        guessSubmit.disabled = false;
+
+        // 텍스트 값 리셋
+        const resultParas = document.querySelectorAll('.resultParas p');
+        for(const resultPara of resultParas) {
+            resultPara.textContent = "";
+        }
+
+        // lastResult 배경색 없애기
+        lastResult.style.background = "white";
+
+        // newgame 버튼 삭제하기
+        newGameButton.remove();
+
+        // 턴 횟수 1회로 되돌리기
+        turn = 1;
+
+        // guessField 값 리셋
+        guessField.value = "";
+
+        // 포커스 이동
+        guessField.focus();
+    }
+
+    guessSubmit.addEventListener("click", () => {
+        initEvent();
+    });
+
+
+</script>
+</html>

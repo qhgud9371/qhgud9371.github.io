@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<p>테스트</p>
+
+<script>
+    const para = document.querySelector("p");
+
+    para.addEventListener("click", updateName);
+
+    function updateName() {
+        const name = prompt("Enter a new name");
+        // para.textContent = `Player 1: ${name}`;
+
+        if(!name) {
+            updateName();
+        } else {
+            localStorage.setItem("name", name);
+            para.innerHTML = name;
+        }
+    }
+
+    if(!localStorage.getItem("name")) {
+        updateName();
+    } else {
+        let acc = localStorage.getItem("name");
+        para.innerHTML = acc;
+    }
+
+
+
+</script>
+
+</body>
+</html>
