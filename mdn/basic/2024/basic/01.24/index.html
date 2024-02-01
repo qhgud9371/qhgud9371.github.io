@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>변수</title>
+</head>
+<body>
+<section></section>
+<script>
+
+    var myName = "Default";
+    myName = "Chris";
+
+    let myAge = 42
+
+    const sections = document.querySelector('section');
+    const para1 = document.createElement('p');
+
+    para1.textContent = `myName 의 20년 뒤 나이는 ${myAge + 20}`;
+
+    sections.append(para1);
+
+
+</script>
+</body>
+</html>
